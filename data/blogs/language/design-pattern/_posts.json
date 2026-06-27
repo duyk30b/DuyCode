@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Design Pattern: Tổng quan",
+    "fileName": "design-pattern-tong-quan.md",
+    "order": 1,
+    "publishedAt": "2026-06-30T14:48:54.235Z"
+  },
+  {
+    "title": "Creational Design Patterns",
+    "fileName": "creational-design-patterns.md",
+    "order": 2,
+    "publishedAt": "2026-06-30T12:42:29.449Z"
+  },
+  {
+    "title": "Inversion of Control",
+    "fileName": "inversion-of-control.md",
+    "order": 3,
+    "publishedAt": "2026-06-30T14:37:46.536Z"
+  },
+  {
+    "title": "OOP, SOLID trong lập trình hướng đối tượng",
+    "fileName": "oop-solid-trong-lap-trinh-huong-oi-tuong.md",
+    "order": 4,
+    "publishedAt": "2026-06-30T14:46:17.967Z"
+  }
+]

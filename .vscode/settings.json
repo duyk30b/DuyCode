@@ -1,0 +1,22 @@
+{
+  "window.title": "${rootName}",
+  "explorer.compactFolders": false,
+  "workbench.tree.indent": 16,
+  "workbench.editor.wrapTabs": true,
+  "git.allowForcePush": true,
+  "files.autoSave": "afterDelay",
+  "files.eol": "\n",
+  "editor.formatOnSave": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [{ "scope": ["entity.name.tag"], "settings": { "foreground": "#4FC1FF" } }] // Tô màu tag trong vue template
+  },
+  "js/ts.preferences.importModuleSpecifierEnding": "minimal", // Import bỏ index.ts
+  "cSpell.words": ["antd"],
+  "search.exclude": {
+    "docs/**": true
+  }
+}
