@@ -51,7 +51,10 @@ const handleClickLogout = () => {
           </div>
         </VueDropdown>
         <div class="item">
-          <RouterLink class="top" :to="{ name: ROUTER_NAME.GAMES }">Games</RouterLink>
+          <a href="./games/index.html" target="_blank">
+            <IconLink2 style="font-size: 18px" />
+            <span class="ml-1">Games</span>
+          </a>
         </div>
         <VueDropdown :position="{ horizontal: 'start', vertical: 'bottom' }" showOnHover>
           <template #trigger>
