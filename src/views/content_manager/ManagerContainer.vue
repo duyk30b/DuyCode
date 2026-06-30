@@ -10,7 +10,7 @@ onBeforeMount(async () => {
   try {
     await categoryStore.loadCategoryMenuTree()
   } catch (error: any) {
-    console.log('🚀 ~ ManagerContainer.vue:24 ~ error:', error)
+    console.log('🚀 ~ ManagerContainer.vue:13 ~ error:', error)
     AlertStore.addError(error.message)
   } finally {
     loaded.value = true

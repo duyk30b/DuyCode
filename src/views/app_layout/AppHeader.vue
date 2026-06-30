@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { IconLogout, IconMenuFold, IconMenuUnfold, IconUser } from '@/common/icon/icon-antd'
-import { IconContrast } from '@/common/icon/icon-google'
+import { IconLogout, IconMenuFold, IconMenuUnfold, IconTool, IconUser } from '@/common/icon/icon-antd'
+import { IconContrast, IconLink2 } from '@/common/icon/icon-google'
 import { VueDropdown } from '@/common/vue-overlay'
+import { SidebarActions, sidebarState } from '@/common/vue-sidebar'
 import { LocalStorageKeys } from '@/config'
 import { ROUTER_NAME } from '@/router'
 import { useAuthStore } from '@/stores/auth.store'
@@ -9,7 +10,6 @@ import { useThemeStore } from '@/stores/theme.store'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import ModalLogin from './ModalLogin.vue'
-import { sidebarState, SidebarActions } from '@/common/vue-sidebar'
 
 const modalLogin = ref<InstanceType<typeof ModalLogin>>()
 
@@ -24,22 +24,75 @@ const handleClickLogout = () => {
 
 <template>
   <ModalLogin ref="modalLogin" />
-  <header class="header">
+  <header class="app_header">
     <div class="flex items-center gap-1">
       <button class="mr-2 menu-toggle" type="button" @click="SidebarActions.toggleSidebar()">
         <IconMenuUnfold v-if="!sidebarState.isVisible" style="font-size: 18px" />
         <IconMenuFold v-else style="font-size: 18px" />
       </button>
-      <nav class="menu">
+      <nav class="app_header_menu">
         <div class="item">
           <RouterLink class="top" :to="{ name: ROUTER_NAME.BLOGS }">Blogs</RouterLink>
         </div>
-        <div class="item">
-          <RouterLink class="top" :to="{ name: ROUTER_NAME.TOOLS }">Tools</RouterLink>
-        </div>
+        <VueDropdown :position="{ horizontal: 'start', vertical: 'bottom' }" showOnHover>
+          <template #trigger>
+            <div class="item">
+              <IconTool />
+              <span class="ml-1">Tools</span>
+            </div>
+          </template>
+          <div class="">
+            <div class="flex items-center gap-1 px-4 py-2">
+              <RouterLink class="top" :to="{ name: ROUTER_NAME.TOOLS_HTML_EDITOR }">HTML Editor</RouterLink>
+            </div>
+            <div class="flex items-center gap-1 px-4 py-2">
+              <RouterLink class="top" :to="{ name: ROUTER_NAME.TOOLS_TYPESCRIPT_EDITOR }">TypeScript Editor</RouterLink>
+            </div>
+          </div>
+        </VueDropdown>
         <div class="item">
           <RouterLink class="top" :to="{ name: ROUTER_NAME.GAMES }">Games</RouterLink>
         </div>
+        <VueDropdown :position="{ horizontal: 'start', vertical: 'bottom' }" showOnHover>
+          <template #trigger>
+            <div class="item">
+              <IconLink2 style="font-size: 18px" />
+              <span class="ml-1">Link</span>
+            </div>
+          </template>
+          <div class="">
+            <div class="flex items-center gap-1 px-4 py-2">
+              <a href="./tools/html-editor.v2.1.html" target="_blank">
+                <IconLink2 style="font-size: 18px" />
+                <span class="ml-1">HTML Editor v2.1</span>
+              </a>
+            </div>
+            <div class="flex items-center gap-1 px-4 py-2">
+              <a href="./tools/html-editor.v2.2.html" target="_blank">
+                <IconLink2 style="font-size: 18px" />
+                <span class="ml-1">HTML Editor v2.2</span>
+              </a>
+            </div>
+            <div class="flex items-center gap-1 px-4 py-2">
+              <a href="./tools/html.html" target="_blank">
+                <IconLink2 style="font-size: 18px" />
+                <span class="ml-1">HTML</span>
+              </a>
+            </div>
+            <div class="flex items-center gap-1 px-4 py-2">
+              <a href="./tools/postgres.html" target="_blank">
+                <IconLink2 style="font-size: 18px" />
+                <span>Postgres</span>
+              </a>
+            </div>
+            <div class="flex items-center gap-1 px-4 py-2">
+              <a href="./tools/typescript.html" target="_blank">
+                <IconLink2 style="font-size: 18px" />
+                <span class="ml-1">TypeScript</span>
+              </a>
+            </div>
+          </div>
+        </VueDropdown>
       </nav>
     </div>
 
@@ -72,7 +125,7 @@ const handleClickLogout = () => {
 </template>
 
 <style scoped lang="scss">
-.header {
+.app_header {
   padding: 0 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -81,10 +134,10 @@ const handleClickLogout = () => {
   background: color-mix(in srgb, var(--color-background-elevated) 84%, transparent);
   backdrop-filter: blur(12px);
 
-  .menu {
+  .app_header_menu {
     display: flex;
     align-items: center;
-    gap: 0.28rem;
+    gap: 1rem;
 
     .item {
       position: relative;
@@ -164,11 +217,6 @@ const handleClickLogout = () => {
 }
 
 @media (max-width: 960px) {
-  :deep(.menu),
-  .search-box {
-    display: none;
-  }
-
   .header {
     padding-inline: 0.8rem;
   }

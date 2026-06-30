@@ -158,7 +158,7 @@ const clickDelete = async () => {
 </script>
 
 <template>
-  <section class="editor-page">
+  <section class="manager-post-page">
     <header class="head">
       <h1 v-if="mode === 'CREATE'">Create New Post</h1>
       <h1 v-if="mode === 'UPDATE'">
@@ -232,9 +232,10 @@ const clickDelete = async () => {
 </template>
 
 <style scoped>
-.editor-page {
+.manager-post-page {
   display: grid;
   gap: 1rem;
+  padding: 1rem;
 }
 
 .form-grid {

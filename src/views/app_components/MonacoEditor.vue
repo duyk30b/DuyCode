@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .monaco-editor {
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   width: 100%;
   height: 100%;

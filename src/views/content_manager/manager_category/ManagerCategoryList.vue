@@ -24,7 +24,7 @@ const handleModalCategoryUpsertSuccess = async () => {
 
 <template>
   <ModalCategoryUpsert ref="modalCategoryUpsert" @success="handleModalCategoryUpsertSuccess" />
-  <section>
+  <section class="manager-category-page">
     <div>
       <div class="flex gap-4 items-center">
         <h1>Category Manager</h1>
@@ -42,6 +42,10 @@ const handleModalCategoryUpsertSuccess = async () => {
 </template>
 
 <style scoped lang="scss">
+.manager-category-page {
+  padding: 1rem;
+}
+
 h1 {
   margin: 0;
 }

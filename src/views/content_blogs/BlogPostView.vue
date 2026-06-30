@@ -112,6 +112,7 @@ const scrollTo = (id: string) => {
 
 <style scoped lang="scss">
 .post-page {
+  padding: 1rem;
   .post-toolbar {
     display: flex;
     justify-content: space-between;
