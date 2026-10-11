@@ -81,7 +81,7 @@ const scrollTo = (id: string) => {
                 class="edit-link"
                 :to="{
                   name: ROUTER_NAME.MANAGER_POST_UPSERT,
-                  query: { mode: 'EDIT', filePath: postContent.postInfo.filePath },
+                  query: { mode: 'UPDATE', filePath: postContent.postInfo.filePath },
                 }"
               >
                 Edit
