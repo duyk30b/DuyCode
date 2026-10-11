@@ -5,6 +5,7 @@ order: 0
 ---
 
 
+
 I. Download Windows và Office
 -----------------------------
 
@@ -21,6 +22,8 @@ I. Download Windows và Office
 -- Win 7 Sp1x64 Professional: SHA1: 0BCFC54019EA175B1EE51F6D2B207A3D14DD2B58 
 
 -- Win 7 Sp1x32 Professional: SHA1: D89937DF3A9BC2EC1A1486195FD308CD3DADE928
+
+-- Win 10: Win10_22H2_EnglishInternational_x64v1.iso: SHA1: DC3982AD27E2D4E03B680630C28F824CB78BCD47 
 
 #### 1.3. Office
 
