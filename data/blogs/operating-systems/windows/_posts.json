@@ -6,9 +6,15 @@
     "publishedAt": "2026-06-07T17:38:30.991Z"
   },
   {
+    "title": "Cài Windows",
+    "fileName": "cai-windows.md",
+    "order": 2,
+    "publishedAt": "2026-10-11T15:10:58.376Z"
+  },
+  {
     "title": "Windows setup",
     "fileName": "windows-setup.md",
-    "order": 2,
+    "order": 3,
     "publishedAt": "2026-06-19T00:19:05.173Z"
   }
 ]
