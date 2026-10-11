@@ -1,8 +1,9 @@
 ---
 title: Cài Windows
 publishedAt: 2026-10-11T15:10:58.376Z
-order: 1
+order: 0
 ---
+
 
 I. Download Windows và Office
 -----------------------------
