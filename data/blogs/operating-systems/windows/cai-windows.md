@@ -1,14 +1,10 @@
 ---
 title: Cài Windows
 publishedAt: 2026-10-11T15:10:58.376Z
-order: 0
+order: 1
 ---
 
-
-
-
-I. Download Windows và Office
------------------------------
+## I. Download Windows và Office
 
 ### 1. Windows và Office bản gốc Microsoft
 
@@ -40,8 +36,7 @@ I. Download Windows và Office
 
 [http://khoatoantin.com/cidms](http://khoatoantin.com/cidms) - User: HQCNTH - Pass: MIGOI - User: trogiup24h- Pass: PHO [https://getcid.top/](https://getcid.top/) [https://0xc004c008.com/](https://0xc004c008.com/) [https://getcid.info/](https://getcid.info/)
 
-II. Cài Win và Ghost
---------------------
+## II. Cài Win và Ghost
 
 ### 1\. Tạo USB cài Win
 
@@ -53,16 +48,15 @@ II. Cài Win và Ghost
 
 #### a. Kiểm tra BIOS Mode
 
-\- Vào: Run\\ msinfo32 - Kéo xuống phần BIOS Mode: "UEFI" hoặc "Legacy" - Nếu máy tính có hỗ trợ chuẩn "UEFI", có thể vào BIOS để chuyển qua lại giữa 2 chuẩn này
+-- Vào: Run\\ msinfo32 - Kéo xuống phần BIOS Mode: "UEFI" hoặc "Legacy" - Nếu máy tính có hỗ trợ chuẩn "UEFI", có thể vào BIOS để chuyển qua lại giữa 2 chuẩn này
 
 #### b. Kiểm tra định dạng ổ cứng
 
-\- Vào: Run\\ diskpart -> đánh lệnh: list disk - Tại đây máy tính sẽ được hiện thị tất cả các ổ cứng - Tại cột “Gpt”: nếu có dấu \* --> chuẩn "GPT", còn nếu không có --> chuẩn "MBR"
+-- Vào: Run\\ diskpart -> đánh lệnh: list disk - Tại đây máy tính sẽ được hiện thị tất cả các ổ cứng - Tại cột “Gpt”: nếu có dấu \* --> chuẩn "GPT", còn nếu không có --> chuẩn "MBR"
 
-III. Active Windows và Office
------------------------------
+## III. Active Windows và Office
 
-\-- Tham khảo thêm: [https://vn-z.vn/threads/tong-hop-key-windows-va-office.10945/](https://vn-z.vn/threads/tong-hop-key-windows-va-office.10945/)
+-- Tham khảo thêm: [https://vn-z.vn/threads/tong-hop-key-windows-va-office.10945/](https://vn-z.vn/threads/tong-hop-key-windows-va-office.10945/)
 
 ### 1\. Windows 10
 
@@ -130,8 +124,7 @@ Sau khi thực hiện 3 lệnh trên bạn phải khởi động lại máy tín
 
 \- Backup: Trong thư mục: C:\\Windows\\System32\\spp\\store ==> Lưu lại thư mục 2.0 - Restore: copy đè ngược lại là xong
 
-IV. Driver
-----------
+## IV. Driver
 
 ### 1. Driver HP EliteBook 8570p - Windows 7 x64bit
 
@@ -149,7 +142,6 @@ IV. Driver
 
 -- Bluetooth (64bit): [https://ftp.hp.com/pub/softpaq/sp66001-66500/sp66402.exe](https://ftp.hp.com/pub/softpaq/sp66001-66500/sp66402.exe) 
 
--- Canon Printer: [https://vn.canon/vi/support/0100278201/9](https://vn.canon/vi/support/0100278201/9)
 
 ### 2. Driver HP Probook 6460b - Windows 7
 
@@ -162,3 +154,8 @@ IV. Driver
 -- Graphics x32: [https://ftp.hp.com/pub/softpaq/sp64501-65000/sp64729.exe](https://ftp.hp.com/pub/softpaq/sp64501-65000/sp64729.exe) 
 
 -- Graphics x64: [https://ftp.hp.com/pub/softpaq/sp64501-65000/sp64730.exe](https://ftp.hp.com/pub/softpaq/sp64501-65000/sp64730.exe)
+
+## V. Software
+- Winrar
+- PDF24: https://www.pdf24.org/en/
+- Canon Printer: [https://vn.canon/vi/support/0100278201/9](https://vn.canon/vi/support/0100278201/9)
