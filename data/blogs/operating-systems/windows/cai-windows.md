@@ -4,6 +4,7 @@ publishedAt: 2026-10-11T15:10:58.376Z
 order: 1
 ---
 
+
 ## I. Download Windows và Office
 
 ### 1. Windows và Office bản gốc Microsoft
@@ -25,6 +26,8 @@ order: 1
 #### 1.3. Office
 
 -- Office 2019 Pro Plus 64bit Retail: [https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/Office/Data/SetupProPlus2019Retail.x64.en-us.exe](https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/Office/Data/SetupProPlus2019Retail.x64.en-us.exe)
+
+-- Active Office: https://massgrave.dev/
 
 ### 2\. Công cụ
 
