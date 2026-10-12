@@ -6,6 +6,7 @@ order: 0
 
 
 
+
 I. Download Windows và Office
 -----------------------------
 
@@ -26,14 +27,6 @@ I. Download Windows và Office
 -- Win 10: Win10_22H2_EnglishInternational_x64v1.iso: SHA1: DC3982AD27E2D4E03B680630C28F824CB78BCD47 
 
 #### 1.3. Office
-
--- Office_ProPlus_2013_SP1x32 (Bản VLSC): d4d7ffd3dffef0a3c08748e400e0890a7a730888 
-
--- Link GoogleDriver: [https://drive.google.com/file/d/1SpuzzZSFvtbVWOX6qqofHWoOi4ngDC8\_/view](https://drive.google.com/file/d/1SpuzzZSFvtbVWOX6qqofHWoOi4ngDC8_/view) 
-
--- Office_ProPlus_2013_SP1x64 (Bản VLSC): ab2c2d525d63a72e0a2dc66efdcea0f824f02cff 
-
--- Link GoogleDriver: [https://drive.google.com/file/d/1KSsy1l2hkDIzEvOYWZapjZILQ\_XY0Dbe/view](https://drive.google.com/file/d/1KSsy1l2hkDIzEvOYWZapjZILQ_XY0Dbe/view) 
 
 -- Office 2019 Pro Plus 64bit Retail: [https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/Office/Data/SetupProPlus2019Retail.x64.en-us.exe](https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/Office/Data/SetupProPlus2019Retail.x64.en-us.exe)
 
