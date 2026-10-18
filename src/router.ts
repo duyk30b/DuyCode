@@ -7,6 +7,8 @@ import ManagerContainer from './views/content_manager/ManagerContainer.vue'
 import ToolsContainer from './views/content_tools/ToolsContainer.vue'
 import BlogsCategoryView from './views/content_blogs/BlogsCategoryView.vue'
 import BlogPostView from './views/content_blogs/BlogPostView.vue'
+import ToolsHTMLEditor from './views/content_tools/ToolsHTMLEditor.vue'
+import ToolsTypescriptEditor from './views/content_tools/ToolsTypescriptEditor.vue'
 
 export const ROUTER_NAME = {
   HOME: 'HOME',
@@ -17,6 +19,8 @@ export const ROUTER_NAME = {
   MANAGER_CATEGORY_LIST: 'MANAGER_CATEGORY_LIST',
   MANAGER_POST_UPSERT: 'MANAGER_POST_UPSERT',
   TOOLS: 'TOOLS',
+  TOOLS_HTML_EDITOR: 'TOOLS_HTML_EDITOR',
+  TOOLS_TYPESCRIPT_EDITOR: 'TOOLS_TYPESCRIPT_EDITOR',
   GAMES: 'GAMES',
 } as const
 
@@ -70,7 +74,21 @@ export const router = createRouter({
       path: '/tools',
       name: ROUTER_NAME.TOOLS,
       component: ToolsContainer,
-      props: true,
+      redirect: () => ({ name: ROUTER_NAME.TOOLS_HTML_EDITOR }),
+      children: [
+        {
+          path: 'html-editor',
+          name: ROUTER_NAME.TOOLS_HTML_EDITOR,
+          component: ToolsHTMLEditor,
+          props: true,
+        },
+        {
+          path: 'typescript-editor',
+          name: ROUTER_NAME.TOOLS_TYPESCRIPT_EDITOR,
+          component: ToolsTypescriptEditor,
+          props: true,
+        },
+      ],
     },
     {
       path: '/games',

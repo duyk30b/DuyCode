@@ -83,7 +83,7 @@ watch(
 </script>
 
 <template>
-  <section class="folder">
+  <div class="category-page">
     <div class="toolbar">
       <Breadcrumb />
       <RouterLink
@@ -124,29 +124,30 @@ watch(
         <p v-if="postMenuList.length === 0" class="empty">No post in this category.</p>
       </div>
     </section>
-  </section>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-}
-
-.folder {
+.category-page {
   display: grid;
   gap: 1rem;
-}
+  padding: 1rem;
 
-.panel {
-  border: 1px solid var(--c-border);
-  border-radius: 16px;
-  padding: 0.95rem;
-  background: var(--c-bg-elevated);
-  box-shadow: var(--shadow-soft);
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .panel {
+    border: 1px solid var(--c-border);
+    border-radius: 16px;
+    padding: 0.95rem;
+    background: var(--c-bg-elevated);
+    box-shadow: var(--shadow-soft);
+  }
 }
 
 h2 {

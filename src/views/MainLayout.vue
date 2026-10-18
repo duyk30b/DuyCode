@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useCategoryStore } from '@/stores/category.store'
 import { onBeforeMount, ref } from 'vue'
 import { AlertStore } from '../common/vue-alert'
 import { VueSwitch } from '../common/vue-form'
@@ -10,28 +9,17 @@ import AppSidebar from './app_layout/AppSidebar.vue'
 
 const authStore = useAuthStore()
 
-const categoryStore = useCategoryStore()
-
 const loading = ref(false)
 
-const autoLogin = async () => {
-  const token = localStorage.getItem(LocalStorageKeys.token)
-  if (token) {
-    try {
-      await authStore.loginByToken(token)
-    } catch (error: any) {
-      AlertStore.addError(error.message)
-      authStore.logout()
-    }
-  }
-}
-
 onBeforeMount(async () => {
+  const token = localStorage.getItem(LocalStorageKeys.token)
+  if (!token) return
+
   try {
     loading.value = true
-    await categoryStore.loadCategoryMenuTree()
-    await autoLogin()
+    await authStore.loginByToken(token)
   } catch (error: any) {
+    authStore.logout()
     console.log('🚀 ~ MainLayout.vue:24 ~ error:', error)
     AlertStore.addError(error.message)
   } finally {
@@ -101,7 +89,6 @@ main {
     }
     .app_content {
       height: calc(100vh - 50px - 40px);
-      padding: 1rem;
       overflow: auto;
     }
     footer {

@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Games 4 nút</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #111;
+        color: #fff;
+        font-family: system-ui, sans-serif;
+      }
+
+      #menu,
+      #game-container {
+        display: none;
+        height: 100%;
+      }
+
+      /* ===== MENU ===== */
+      #menu {
+        padding: 20px;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .upload-box input {
+        background: #222;
+        color: #fff;
+        padding: 8px;
+        border-radius: 6px;
+        border: none;
+      }
+
+      .game-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .game-card {
+        cursor: pointer;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #222;
+        transition: transform 0.2s ease;
+        text-align: center;
+      }
+
+      .game-card:hover {
+        transform: scale(1.04);
+      }
+
+      .game-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .game-title {
+        padding: 10px;
+        font-size: 14px;
+        background: #1a1a1a;
+      }
+
+      /* ===== GAME ===== */
+      #game-container {
+        position: relative;
+      }
+
+      #game {
+        width: 100%;
+        height: 100%;
+      }
+
+      .back-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        padding: 6px 12px;
+        background: #222;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===== MENU ===== -->
+    <div id="menu">
+      <div
+        style="display: flex; align-items: center; flex-wrap: wrap; gap: 16px"
+      >
+        <h1>Games 4 nút</h1>
+
+        <!-- UPLOAD NES -->
+        <div class="upload-box">
+          <input
+            type="file"
+            accept=".nes,.sfc,.smc"
+            onchange="playLocalFile(event)"
+          />
+        </div>
+      </div>
+
+      <div class="game-grid" id="gameGrid" style="margin-top: 20px"></div>
+    </div>
+
+    <!-- ===== GAME ===== -->
+    <div id="game-container">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div id="game"></div>
+    </div>
+
+    <script>
+      /* ===== GAME LIST ===== */
+      const games = [
+        {
+          title: "Contra (Japan)",
+          rom: "games/contra/Contra(Japan).nes",
+          cover: "games/contra/Contra.webp",
+          gif: "games/contra/Contra.gif",
+        },
+        {
+          title: "Super Contra (Japan)",
+          rom: "games/supper-contra/SuperContra(Japan).nes",
+          cover: "games/supper-contra/SupperContra.png",
+          gif: "games/supper-contra/SupperContra.gif",
+        },
+        {
+          title: "Contra III: The Alien Wars (Japan,En)",
+          rom: "games/contra-iii-the-alien-wars/ContraSpirits(Japan,En).sfc",
+          cover: "games/contra-iii-the-alien-wars/ContraIIITheAlienWars.png",
+          // gif: 'games/contra-iii-the-alien-wars/ContraIIITheAlienWars.gif',
+        },
+        {
+          title: "Super Mario Bros. (World)",
+          rom: "games/supper-mario-bros/SuperMarioBros(World).nes",
+          cover: "games/supper-mario-bros/SuperMarioBros.webp",
+          gif: "games/supper-mario-bros/SuperMarioBros.gif",
+        },
+        {
+          title: "Battle City (Japan)",
+          rom: "games/battle-city/BattleCity(Japan).nes",
+          cover: "games/battle-city/BattleCity.png",
+          gif: "games/battle-city/BattleCity.gif",
+        },
+        {
+          title: "Bomber Man (Japan)",
+          rom: "games/bomber-man/BomberMan(Japan).nes",
+          cover: "games/bomber-man/BomberMan.png",
+          gif: "games/bomber-man/BomberMan.gif",
+        },
+        {
+          title: "Bomber Man II (Japan)",
+          rom: "games/bomber-man-2/BomberManII(Japan).nes",
+          cover: "games/bomber-man-2/BomberManII.jpg",
+          gif: "games/bomber-man-2/BomberManII.gif",
+        },
+        {
+          title: "Guerrilla War (Japan)",
+          rom: "games/guerrilla-war/Guevara(Japan).nes",
+          cover: "games/guerrilla-war/GuerrillaWar.png",
+          gif: "games/guerrilla-war/GuerrillaWar.gif",
+        },
+        {
+          title: "Jackal (World)",
+          rom: "games/jackal/Jackal(World).nes",
+          cover: "games/jackal/Jackal.png",
+          gif: "games/jackal/Jackal.gif",
+        },
+        {
+          title: "Jackie Chan (Japan)",
+          rom: "games/jackie-chan/JackieChan(Japan).nes",
+          cover: "games/jackie-chan/JackieChan.png",
+          gif: "games/jackie-chan/JackieChan.gif",
+        },
+        {
+          title: "Battletoads & Double Dragon: The Ultimate Team (USA)",
+          rom: "games/battletoads-double-dragon/BattletoadsDoubleDragon(USA).nes",
+          cover: "games/battletoads-double-dragon/BattletoadsDoubleDragon.png",
+          video: "games/battletoads-double-dragon/BattletoadsDoubleDragon.webm",
+        },
+        {
+          title: "Dr. Mario (Japan, USA)",
+          rom: "games/dr-mario/Dr.Mario(Japan,USA).nes",
+          cover: "games/dr-mario/Dr.Mario.webp",
+          gif: "games/dr-mario/Dr.Mario.gif",
+        },
+        {
+          title: "Tetris (USA)",
+          rom: "games/tetris/Tetris(USA).nes",
+          cover: "games/tetris/Tetris.jpg",
+          gif: "games/tetris/Tetris.gif",
+        },
+        {
+          title: "Lode Runner (Japan)",
+          rom: "games/lode-runner/LodeRunner(Japan).nes",
+          cover: "games/lode-runner/LodeRunner.png",
+          gif: "games/lode-runner/LodeRunner.gif",
+        },
+        {
+          title: "Bugs Bunny Crazy Castle (USA)",
+          rom: "games/bugs-bunny-crazy-castle/BugsBunnyCrazyCastle(USA).nes",
+          cover: "games/bugs-bunny-crazy-castle/BugsBunnyCrazyCastle.png",
+          gif: "games/bugs-bunny-crazy-castle/BugsBunnyCrazyCastle.gif",
+        },
+        {
+          title: "Mario Bros. (World)",
+          rom: "games/mario-bros/MarioBros(World).nes",
+          cover: "games/mario-bros/MarioBros.jpg",
+          gif: "games/mario-bros/MarioBros.gif",
+        },
+        {
+          title: "ContraForce",
+          rom: "NES/ContraForce.nes",
+          cover: "images/ContraForce.png",
+        },
+        {
+          title: "Chip 'n Dale",
+          rom: "NES/Chip 'n Dale.nes",
+          cover: "images/Chip 'n Dale.png",
+        },
+        {
+          title: "Chip 'n Dale 2",
+          rom: "NES/Chip 'n Dale 2.nes",
+          cover: "images/Chip 'n Dale 2.png",
+        },
+        {
+          title: "Aladdin",
+          rom: "NES/Aladdin.nes",
+          cover: "images/Aladdin.png",
+        },
+        {
+          title: "Donkey Kong",
+          rom: "NES/Donkey Kong.nes",
+          cover: "images/Donkey Kong.png",
+        },
+        {
+          title: "Double Dragon II - The Revenge",
+          rom: "NES/Double Dragon II - The Revenge.nes",
+          cover: "images/Double Dragon II - The Revenge.png",
+        },
+        {
+          title: "Galaxian",
+          rom: "NES/Galaxian.nes",
+          cover: "images/Galaxian.png",
+        },
+        {
+          title: "PacMan",
+          rom: "NES/PacMan.nes",
+          cover: "images/PacMan.png",
+        },
+      ];
+
+      /* ===== RENDER MENU ===== */
+      const grid = document.getElementById("gameGrid");
+
+      games.forEach((game) => {
+        const card = document.createElement("div");
+        card.className = "game-card";
+
+        const img = document.createElement("img");
+        img.src = game.cover;
+        img.alt = game.title;
+
+        // // preload gif để hover không delay
+        // if (game.gif) {
+        //   const preload = new Image()
+        //   preload.src = game.gif
+        // }
+
+        // card.addEventListener('mouseenter', () => {
+        //   if (game.gif) img.src = game.gif
+        // })
+
+        // card.addEventListener('mouseleave', () => {
+        //   img.src = game.cover
+        // })
+
+        let videoEl = null;
+
+        // preload gif (chỉ khi chưa có video)
+        if (!game.video && game.gif) {
+          const preload = new Image();
+          preload.src = game.gif;
+        }
+
+        card.addEventListener("mouseenter", () => {
+          if (game.video) {
+            if (videoEl) return;
+
+            videoEl = document.createElement("video");
+            videoEl.src = game.video;
+            videoEl.autoplay = true;
+            videoEl.loop = true;
+            videoEl.muted = true;
+            videoEl.playsInline = true;
+            videoEl.preload = "none";
+            videoEl.style.width = "100%";
+            videoEl.style.height = "200px";
+            videoEl.style.objectFit = "cover";
+
+            card.replaceChild(videoEl, img);
+            return;
+          }
+
+          // ===== FALLBACK GIF =====
+          if (game.gif) {
+            img.src = game.gif;
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          if (videoEl) {
+            videoEl.pause();
+            videoEl.remove();
+            videoEl = null;
+          }
+
+          // restore cover
+          img.src = game.cover;
+          card.insertBefore(img, title);
+        });
+
+        card.addEventListener("click", () => launch(game.rom));
+
+        const title = document.createElement("div");
+        title.className = "game-title";
+        title.textContent = game.title;
+
+        card.appendChild(img);
+        card.appendChild(title);
+        grid.appendChild(card);
+      });
+
+      const detectCoreByFilename = (name) => {
+        const ext = name.split(".").pop().toLowerCase();
+        if (ext === "sfc" || ext === "smc") return "snes";
+        if (ext === "nes") return "nes";
+        alert("Định dạng không hỗ trợ: " + ext);
+        return null;
+      };
+
+      /* ===== UPLOAD LOCAL NES ===== */
+      function playLocalFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const ejsCore = detectCoreByFilename(file.name);
+        if (!ejsCore) return;
+
+        const url = URL.createObjectURL(file);
+        startGame(url, ejsCore);
+      }
+
+      /* ===== ROUTER ===== */
+      function launch(rom) {
+        location.hash = "game=" + rom;
+      }
+
+      function goHome() {
+        location.hash = "";
+        location.reload();
+      }
+
+      function router() {
+        const hash = location.hash;
+        if (!hash.startsWith("#game=")) {
+          showMenu();
+          return;
+        }
+        const rom = hash.replace("#game=", "");
+        const ejsCore = detectCoreByFilename(rom);
+        if (!ejsCore) return;
+        startGame("./" + rom, ejsCore);
+      }
+
+      /* ===== UI ===== */
+      function showMenu() {
+        document.getElementById("menu").style.display = "block";
+        document.getElementById("game-container").style.display = "none";
+        document.getElementById("game").innerHTML = "";
+      }
+
+      function showGame() {
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("game-container").style.display = "block";
+      }
+
+      /* ===== EMULATOR ===== */
+      function startGame(romUrl, ejsCore) {
+        if (ejsCore !== "nes" && ejsCore !== "snes") {
+          return alert("Định dạng không hỗ trợ: " + ejsCore);
+        }
+        showGame();
+        document.getElementById("game").innerHTML = "";
+
+        window.EJS_player = "#game";
+        window.EJS_core = ejsCore;
+        // window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'
+        window.EJS_pathtodata = "./emulatorjs/data/";
+        window.EJS_gameUrl = romUrl;
+        window.EJS_startOnLoaded = true;
+
+        if (ejsCore === "nes") {
+          EJS_defaultControls = {
+            0: {
+              0: {
+                value: "j",
+                value2: "BUTTON_2",
+              },
+              1: {
+                value: "u",
+                value2: "BUTTON_4",
+              },
+              2: {
+                value: "space",
+                value2: "SELECT",
+              },
+              3: {
+                value: "enter",
+                value2: "START",
+              },
+              4: {
+                value: "w",
+                value2: "DPAD_UP",
+              },
+              5: {
+                value: "s",
+                value2: "DPAD_DOWN",
+              },
+              6: {
+                value: "a",
+                value2: "DPAD_LEFT",
+              },
+              7: {
+                value: "d",
+                value2: "DPAD_RIGHT",
+              },
+              8: {
+                value: "k",
+                value2: "BUTTON_1",
+              },
+              9: {
+                value: "i",
+                value2: "BUTTON_3",
+              },
+              10: {
+                value: "q",
+                value2: "BUTTON_5",
+              },
+              11: {
+                value: "e",
+                value2: "BUTTON_6",
+              },
+            },
+            1: {
+              0: {
+                value: "numpad 2",
+                value2: "BUTTON_2",
+              },
+              1: {
+                value: "numpad 5",
+                value2: "BUTTON_4",
+              },
+              2: {
+                value: "decimal point",
+                value2: "SELECT",
+              },
+              3: {
+                value: "enter",
+                value2: "START",
+              },
+              4: {
+                value: "up arrow",
+                value2: "DPAD_UP",
+              },
+              5: {
+                value: "down arrow",
+                value2: "DPAD_DOWN",
+              },
+              6: {
+                value: "left arrow",
+                value2: "DPAD_LEFT",
+              },
+              7: {
+                value: "right arrow",
+                value2: "DPAD_RIGHT",
+              },
+              8: {
+                value: "numpad 3",
+                value2: "BUTTON_1",
+              },
+              9: {
+                value: "numpad 6",
+                value2: "BUTTON_3",
+              },
+              10: {
+                value: "numpad 8",
+                value2: "BUTTON_5",
+              },
+              11: {
+                value: "numpad 9",
+                value2: "BUTTON_6",
+              },
+            },
+            2: {},
+            3: {},
+          };
+        }
+        if (ejsCore === "snes") {
+          EJS_defaultControls = {
+            0: {
+              0: {
+                value: "k",
+                value2: "BUTTON_2",
+              },
+              1: {
+                value: "j",
+                value2: "BUTTON_4",
+              },
+              2: {
+                value: "space",
+                value2: "SELECT",
+              },
+              3: {
+                value: "enter",
+                value2: "START",
+              },
+              4: {
+                value: "w",
+                value2: "DPAD_UP",
+              },
+              5: {
+                value: "s",
+                value2: "DPAD_DOWN",
+              },
+              6: {
+                value: "a",
+                value2: "DPAD_LEFT",
+              },
+              7: {
+                value: "d",
+                value2: "DPAD_RIGHT",
+              },
+              8: {
+                value: "i",
+                value2: "BUTTON_1",
+              },
+              9: {
+                value: "u",
+                value2: "BUTTON_3",
+              },
+              10: {
+                value: "q",
+                value2: "BUTTON_5",
+              },
+              11: {
+                value: "e",
+                value2: "BUTTON_6",
+              },
+            },
+            1: {
+              0: {
+                value: "numpad 3",
+                value2: "BUTTON_2",
+              },
+              1: {
+                value: "numpad 2",
+                value2: "BUTTON_4",
+              },
+              2: {
+                value: "decimal point",
+                value2: "SELECT",
+              },
+              3: {
+                value: "enter",
+                value2: "START",
+              },
+              4: {
+                value: "up arrow",
+                value2: "DPAD_UP",
+              },
+              5: {
+                value: "down arrow",
+                value2: "DPAD_DOWN",
+              },
+              6: {
+                value: "left arrow",
+                value2: "DPAD_LEFT",
+              },
+              7: {
+                value: "right arrow",
+                value2: "DPAD_RIGHT",
+              },
+              8: {
+                value: "numpad 6",
+                value2: "BUTTON_1",
+              },
+              9: {
+                value: "numpad 5",
+                value2: "BUTTON_3",
+              },
+              10: {
+                value: "numpad 8",
+                value2: "BUTTON_5",
+              },
+              11: {
+                value: "numpad 9",
+                value2: "BUTTON_6",
+              },
+            },
+            2: {},
+            3: {},
+          };
+        }
+
+        // window.EJS_fullscreenOnStart = true;
+        // window.EJS_Buttons = {
+        //   playPause: false,
+        //   restart: false,
+        //   mute: false,
+        // };
+        loadEmulator();
+      }
+
+      function loadEmulator() {
+        const old = document.getElementById("ejs-loader");
+        if (old) old.remove();
+
+        const script = document.createElement("script");
+        script.id = "ejs-loader";
+        // script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js'
+        script.src = "./emulatorjs/data/loader.js";
+        document.body.appendChild(script);
+      }
+
+      window.addEventListener("hashchange", router);
+      router();
+    </script>
+  </body>
+</html>
